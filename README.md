@@ -1,4 +1,4 @@
-<h3>BunnyMe9 Quotes and Notes Web Application</h3>
+<h2>BunnyMe9 Quotes and Notes Web Application</h2>
 <p>This project is a Flask-based web application that allows users to register, log in, and manage personal notes along with viewing random quotes. It demonstrates core web development concepts such as authentication, database integration, form handling, and clean UI design using Flask and related extensions.
 The project is intended for learning, practice, and portfolio demonstration.</p>
 
@@ -95,3 +95,10 @@ To start fresh, delete the existing project database file.
 <strong>Developed by <a href="https://github.com/sanheeth-singh">Sanheeth Singh</a></strong><br>
 Flask-based learning and portfolio project
 </p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3-blue?logo=python">
+  <img src="https://img.shields.io/badge/Flask-Framework-black?logo=flask">
+  <img src="https://img.shields.io/badge/SQLite-Database-blue?logo=sqlite">
+</p>
+
