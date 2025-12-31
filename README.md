@@ -4,13 +4,15 @@ The project is intended for learning, practice, and portfolio demonstration.</p>
 
 <h2>Project Overview </h2>
 <h3>The application provides:</h3>
-<li>User authentication using Flask-Login</li>
-<li>Secure form handling using Flask-WTF</li> 
-<li>Database operations using SQLAlchemy</li>
-<li>CRUD functionality for notes</li>
-<li>Quote display on the homepage</li>
-<li>Flash messages for user feedback</li>
-<li>Session-based user experience</li>
+<ul>
+  <li>User authentication using Flask-Login</li>
+  <li>Secure form handling using Flask-WTF</li> 
+  <li>Database operations using SQLAlchemy</li>
+  <li>CRUD functionality for notes</li>
+  <li>Quote display on the homepage</li>
+  <li>Flash messages for user feedback</li>
+  <li>Session-based user experience</li>
+</ul>
 Each user can create, edit, delete, and search their own notes after logging in
 
 <hr>
