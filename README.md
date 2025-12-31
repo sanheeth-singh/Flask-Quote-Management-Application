@@ -84,27 +84,47 @@ HTML, CSS, Bootstrap
 ◽Project Structure
 
 App-flask1/
+
 ├── testflaskapp.py
+
 ├── models.py
+
 ├── forms.py
+
 ├── README.md
+
 ├── requirements.txt
+
 ├── .gitignore
+
 ├── instance/
+
 │   └── app.db
+
 ├── templates/
+
 │   ├── base.html
+
 │   ├── home.html
+
 │   ├── login.html
+
 │   ├── register.html
+
 │   ├── changes.html
+
 │   ├── preferences.html
+
 │   ├── view.html
+
 │   ├── test_delete.html
+
 │   └── edit_note.html
-└── static/
-    ├── css/
-    └── img/
+
+└── static
+    ├── css
+    └── images
+
 
 ◽Database
 
