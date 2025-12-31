@@ -1,0 +1,329 @@
+{% extends "base.html" %}
+{% block title %}Users - View{% endblock %}
+{% block content %}
+<html>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/view.css') }}">
+
+<div class="users-page container">
+    <h1 class="page-title">Users</h1>
+    <p class="page-sub">Click any avatar (or the ▷ button) to expand that user's quotes.</p>
+    <a href="/dashboard" class="floating-btn"> ← Dashboard</a>
+
+
+    <div class="user-list">
+        {% for item in values %}
+        <article class="user-row card">
+            <div class="user-summary">
+
+                <!-- Avatar (click to toggle) -->
+                <button class="avatar-btn" aria-expanded="false" aria-controls="quotes-{{item.id}}" data-target="#quotes-{{item.id}}">
+                    <img src="{{ url_for('static', filename='images/avatar.png') }}" alt="Avatar of {{ item.user }}" class="avatar-img">
+                </button>
+
+                <!-- Basic info -->
+                <div class="user-meta">
+                    <div class="user-name">
+                        <strong>{{ item.user }}</strong>
+                        <span class="user-handle">@{{ item.user }}</span>
+                    </div>
+                    <div class="user-extra">
+                        {% if item.email %}
+                        <span class="meta-pill">{{ item.email }}</span>
+                        {% endif %}
+                        <span class="meta-pill">{{ item.quote|length }} posts</span>
+                    </div>
+                </div>
+
+                <!-- Expand control -->
+                <div class="user-actions">
+                    <button class="expand-btn" aria-expanded="false" aria-controls="quotes-{{item.id}}" data-target="#quotes-{{item.id}}">
+                        <span class="chev">▸</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Collapsible quotes container -->
+            <div id="quotes-{{item.id}}" class="quotes-collapse" hidden>
+                {% if item.quote %}
+                    <div class="quotes-grid">
+                        {% for q in item.quote %}
+                        <div class="quote-card">
+                            <p class="quote-content">“{{ q.content }}”</p>
+                            <div class="quote-footer">
+                                <small class="quote-meta">#{{ q.id }} • {{ q.content|length }} chars</small>
+                                <!-- optional edit/delete for admins:
+                                <div class="quote-actions">
+                                  <a href="{{ url_for('edit_note', id=q.id) }}">Edit</a>
+                                </div>
+                                -->
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="no-quotes">This user hasn't posted any quotes yet.</p>
+                {% endif %}
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+<!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</html>
+<script>
+/* --- Toggle expand/collapse for each user --- */
+document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.avatar-btn, .expand-btn');
+    if (!btn) return;
+
+    const targetSelector = btn.getAttribute('data-target');
+    if (!targetSelector) return;
+
+    const container = document.querySelector(targetSelector);
+    if (!container) return;
+
+    const isHidden = container.hasAttribute('hidden');
+
+    // Close any other open containers (optional: keep only one open)
+    document.querySelectorAll('.quotes-collapse').forEach(c => {
+        if (c !== container) {
+            c.setAttribute('hidden', '');
+            const parentRow = c.closest('.user-row');
+            if (parentRow) {
+                parentRow.querySelectorAll('[aria-expanded]').forEach(x => x.setAttribute('aria-expanded', 'false'));
+                const chev = parentRow.querySelector('.chev');
+                if (chev) chev.style.transform = '';
+            }
+        }
+    });
+
+    if (isHidden) {
+        // open
+        container.removeAttribute('hidden');
+        // animate height
+        const h = container.scrollHeight;
+        container.style.height = '0px';
+        requestAnimationFrame(() => {
+            container.style.transition = 'height 320ms ease';
+            container.style.height = h + 'px';
+        });
+        // clear inline height after animation so it can size naturally later
+        setTimeout(() => {
+            container.style.height = '';
+            container.style.transition = '';
+        }, 350);
+
+        // set aria
+        btn.setAttribute('aria-expanded', 'true');
+        const parentRow = container.closest('.user-row');
+        if (parentRow) {
+            parentRow.querySelectorAll('[aria-expanded]').forEach(x => x.setAttribute('aria-expanded', 'true'));
+            const chev = parentRow.querySelector('.chev');
+            if (chev) chev.style.transform = 'rotate(90deg)';
+        }
+    } else {
+        // close
+        const h = container.scrollHeight;
+        container.style.height = h + 'px';
+        requestAnimationFrame(() => {
+            container.style.transition = 'height 280ms ease';
+            container.style.height = '0px';
+        });
+        setTimeout(() => {
+            container.setAttribute('hidden', '');
+            container.style.height = '';
+            container.style.transition = '';
+        }, 300);
+
+        // set aria
+        btn.setAttribute('aria-expanded', 'false');
+        const parentRow = container.closest('.user-row');
+        if (parentRow) {
+            parentRow.querySelectorAll('[aria-expanded]').forEach(x => x.setAttribute('aria-expanded', 'false'));
+            const chev = parentRow.querySelector('.chev');
+            if (chev) chev.style.transform = '';
+        }
+    }
+});
+</script>
+
+<style>
+  /* Layout container */
+.users-page {
+    max-width: 980px;
+    margin: 36px auto;
+    padding: 0 18px;
+}
+
+/* Page headings */
+.page-title {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    color: #1a1f3a;
+}
+.page-sub {
+    margin-bottom: 20px;
+    color: #5b607a;
+}
+
+/* User row / card */
+.user-list .user-row {
+    margin-bottom: 14px;
+    padding: 12px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #ffffff, #fbfdff);
+    border: 1px solid rgba(60,90,220,0.06);
+    box-shadow: 0 6px 20px rgba(40,45,80,0.04);
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+.user-list .user-row:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(40,45,80,0.06);
+}
+
+/* Summary row */
+.user-summary {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Avatar button */
+.avatar-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+}
+.avatar-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #f1f4ff;
+    box-shadow: 0 6px 18px rgba(60,90,220,0.08);
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+.avatar-btn:hover .avatar-img {
+    transform: scale(1.06);
+    box-shadow: 0 12px 28px rgba(60,90,220,0.12);
+}
+
+.floating-btn {
+  position: fixed;          /* makes it float */
+  top: 120px;               /* distance from bottom */
+  left: 20px;              /* distance from right */
+
+  background-color: #4a6cf7; /* polite blue */
+  color: white;
+  padding: 12px 18px;
+  border-radius: 30px;       /* rounded pill shape */
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.floating-btn:hover {
+  background: #eceffc;
+  color: #3050ff;
+  transform: translateY(-2px); /* subtle lift */
+}
+
+
+/* User metadata */
+.user-meta {
+    flex: 1;
+}
+.user-name { font-size: 16px; font-weight: 700; color: #121428; display:flex; gap:8px; align-items:center; }
+.user-handle { font-size: 13px; color: #6b6f86; font-weight: 500; }
+
+/* small pills for email/posts */
+.user-extra { margin-top:6px; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.meta-pill {
+    background: linear-gradient(90deg, rgba(58,92,208,0.06), rgba(58,92,208,0.03));
+    padding:6px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    color: #34408a;
+    border: 1px solid rgba(58,92,208,0.06);
+}
+
+/* Actions */
+.user-actions { margin-left: 8px; }
+.expand-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background .12s ease;
+}
+.expand-btn:hover { background: rgba(10,12,30,0.04); }
+.chev { display:inline-block; transform-origin: center; transition: transform .18s ease; font-size: 18px; color: #34408a; }
+
+/* Collapsible quotes container */
+.quotes-collapse {
+    margin-top: 12px;
+    overflow: hidden;
+    border-radius: 12px;
+    padding: 12px;
+    background: linear-gradient(180deg, rgba(245,246,255,0.9), rgba(255,255,255,0.9));
+    border: 1px solid rgba(60,90,220,0.03);
+}
+
+/* Grid of quote cards */
+.quotes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 12px;
+}
+
+/* Quote card */
+.quote-card {
+    padding: 12px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 6px 16px rgba(20,22,50,0.04);
+    border: 1px solid rgba(20,22,50,0.03);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+.quote-content {
+    font-style: italic;
+    color: #111328;
+    margin-bottom: 10px;
+}
+.quote-footer {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size: 12px;
+    color: #6b6f86;
+}
+
+/* No-quotes message */
+.no-quotes {
+    padding: 14px;
+    color: #5b607a;
+    text-align: center;
+}
+
+/* Responsive tweaks */
+@media (max-width: 640px) {
+    .avatar-img { width: 54px; height: 54px; }
+    .page-title { font-size: 22px; }
+    .quotes-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+
+{% endblock %}

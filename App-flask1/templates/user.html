@@ -1,0 +1,22 @@
+{%extends "base.html"%}
+{%block title%}User Page{%endblock%}
+{%block content%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>Logged in with </h3>
+    <p>{{user_mail}}</p>
+
+    <div>
+        <section class="user-quotes">
+            <form method="POST">
+            <input type="text" placeholder="write your quote">
+            </form>
+        </section>
+    </div>
+</body>
+</html>
+{%endblock%}

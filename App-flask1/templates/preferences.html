@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<html>
+<head>
+<title>Edit Profile</title>
+</head>
+<body>
+<div class="edit-profile-container">
+
+    <!-- BACK NAV -->
+    <a href="{{ url_for('dashboard') }}" class="floating-btn">← Back to Profile</a>
+
+    <!-- HEADER -->
+    <div class="edit-header">
+        <h1>Edit Profile</h1>
+        <p>Update how others see you on Inspire.</p>
+    </div>
+
+    <!-- PROFILE PREVIEW {{ current_user.user[0]|upper }} use this for no profile picture-->
+    <div class="profile-preview">
+        <div class="preview-avatar">
+            <img src="{{ url_for('static', filename='images/avatar.png') }}" alt="Avatar" class="preview-avatar" title="profile picture">
+        </div>
+        <div>
+            <h3>{{ current_user.user }}</h3>
+            <span class="preview-handle">@{{ current_user.user }}</span>
+        </div>
+    </div>
+
+    <!-- FORM -->
+    <form method="POST" class="edit-form">
+        {{ form.hidden_tag() }}
+
+        <!-- BIO -->
+        <div class="form-group">
+            {{ form.bio.label }}
+            {{ form.bio(
+                class="form-control",
+                placeholder="Tell people a little about yourself… (edit-profile)"
+            ) }}
+            <small class="hint">You can change this anytime.</small>
+            <div>
+            <!--        flash messages-->
+        {%with messages = get_flashed_messages(with_categories=true)%}
+            {%if messages%}
+                {%for category, message in messages%}
+                    <div class="alert">
+                        {{message}}
+                    </div>
+                {%endfor%}
+            {%endif%}
+        {%endwith%}
+        </div>
+
+        </div>
+
+        <!-- FUTURE FIELDS (PLACEHOLDERS) -->
+        <div class="form-group disabled">
+            <label>Location</label>
+            <input type="text" placeholder="Coming soon" disabled>
+        </div>
+
+        <div class="form-group disabled">
+            <label>Social</label>
+            <input type="text" placeholder="Coming soon" disabled>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="form-actions">
+            <a href="{{ url_for('dashboard') }}" class="btn-cancel">Cancel</a>
+            {{ form.submit(class="btn-save") }}
+        </div>
+
+    </form>
+
+    <!-- FOOT-NOTE -->
+    <p class="foot-note">
+        Your profile helps others connect with your thoughts.
+    </p>
+
+</div>
+<!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+<style>
+    .edit-profile-container {
+    max-width: 720px;
+    margin: 60px auto;
+    padding: 20px;
+}
+
+/* BACK LINK */
+.back-link {
+    text-decoration: none;
+    color: #3A5CD0;
+    font-weight: 500;
+}
+
+.floating-btn {
+  position: fixed;          /* makes it float */
+  top: 120px;               /* distance from bottom */
+  left: 20px;              /* distance from right */
+
+  background-color: #4a6cf7; /* polite blue */
+  color: white;
+  padding: 12px 18px;
+  border-radius: 30px;       /* rounded pill shape */
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.floating-btn:hover {
+  background: #eceffc;
+  color: #3050ff;
+  transform: translateY(-2px); /* subtle lift */
+}
+
+/* HEADER */
+.edit-header {
+    margin-top: 20px;
+}
+.edit-header h1 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1B1E32;
+}
+.edit-header p {
+    color: #555;
+    margin-top: 6px;
+}
+
+/* PROFILE PREVIEW */
+.profile-preview {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #F6F7FF;
+    padding: 16px;
+    border-radius: 14px;
+    margin: 30px 0;
+}
+
+.preview-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #3A5CD0;
+    color: white;
+    font-weight: 700;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-avatar {
+    position: relative;
+}
+
+.profile-avatar img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #f3f3f3;
+    transition: 0.3s;
+}
+
+.preview-handle {
+    font-size: 14px;
+    color: #666;
+}
+
+/* FORM */
+.edit-form {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+}
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1B1E32;
+}
+
+.form-textarea {
+    width: 100%;
+    min-height: 50px;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    resize: vertical;
+    font-size: 15px;
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: #3A5CD0;
+}
+
+.hint {
+    font-size: 13px;
+    color: #777;
+}
+
+/* DISABLED FUTURE FIELDS */
+.form-group.disabled input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px dashed #ccc;
+    background: #FAFAFA;
+}
+
+/* ACTIONS */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+.btn-cancel {
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #444;
+    background: #EFEFEF;
+}
+
+.btn-save {
+    padding: 10px 24px;
+    border-radius: 10px;
+    border: none;
+    background: #3A5CD0;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-save:hover {
+    background: #2F4CC0;
+}
+
+/* FOOT NOTE */
+.foot-note {
+    margin-top: 18px;
+    font-size: 13px;
+    color: #777;
+    text-align: center;
+}
+
+</style>
+{%endblock%}
+

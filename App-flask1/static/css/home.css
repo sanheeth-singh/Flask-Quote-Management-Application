@@ -1,0 +1,122 @@
+/* SMOOTH FADE-IN ANIMATION */
+* {
+    animation: fadeIn 0.6s ease forwards;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* HERO SECTION */
+.hero-wrap {
+    background: linear-gradient(135deg, #ECE9FF, #BAD1FF);
+    padding: 100px 20px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.05);
+}
+
+.hero-title {
+    font-size: 48px;
+    font-weight: 800;
+    color: #1B1E32;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    color: #3A3E59;
+    margin-bottom: 30px;
+}
+
+/* QUOTE CARD */
+.quote-card {
+    background: #FAFAFF;
+    padding: 40px 30px;
+    border-radius: 16px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.quote-text {
+    font-size: 22px;
+    font-style: italic;
+    color: #1B1E32;
+}
+
+/* BUTTONS */
+.btn-primary {
+    background: #3A5CD0;
+    color: white;
+    padding: 14px 32px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #2F4CC0;
+    transform: translateY(-4px);
+}
+
+.btn-outline {
+    border: 2px solid #3A5CD0;
+    color: #3A5CD0;
+    padding: 14px 32px;
+    font-size: 18px;
+    border-radius: 10px;
+    margin-left: 10px;
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    background: #3A5CD0;
+    color: white;
+    transform: translateY(-4px);
+}
+
+/* FEATURES GRID */
+.section {
+    margin-top: 70px;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1B1E32;
+    margin-bottom: 30px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+.feature-card {
+    background: #FFFFFF;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    color: #333;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    margin-top: 60px;
+    padding: 20px;
+    color: #3A3E59;
+}
+
+.footer-small {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* SOFT GLOW EFFECT */
+.shadow-glow {
+    box-shadow: 0 0 50px rgba(58, 92, 208, 0.15);
+}

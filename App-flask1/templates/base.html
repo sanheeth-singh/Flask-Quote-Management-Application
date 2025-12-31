@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{%block title%}{%endblock%}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" >
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">BunnyMe9</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-line">
+          <a class="nav-link" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-line">
+          <a class="nav-link" href="dashboard">Profile</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Explore
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="dashboard">ADD POST</a></li>
+            <li><a class="dropdown-item" href="view">QUOTES FEED</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li class="nav-line"><a class="dropdown-item" href="register">REGISTER</a></li>
+          </ul>
+        </li>
+
+          {% if current_user.is_authenticated %}
+<!--          Account drop-->
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Account
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">SETTINGS</a></li>
+            <li><a class="dropdown-item" href="#">HELP</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+<!--                <a class="item">-->
+<!--                    <form class="container-fluid" action="{{ url_for('delete_account') }}" method="POST" onsubmit="return confirm('Are you sure you want to delete your account? This cannot be undone.');">-->
+<!--                         <button class="btn btn-outline-danger btn-sm" type="submit">Delete My Account</button>-->
+<!--                    </form>-->
+<!--                </a>-->
+            </li>
+          </ul>
+        </li>
+        {%endif%}
+
+
+      </ul>
+        <div style="margin-right:10px;">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('logout') }}" class="btn btn-outline-danger btn-sm">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-sm">Login</a>
+            {% endif %}
+        </div>
+
+
+
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<!--    <section>-->
+<!--&lt;!&ndash;            flash messages&ndash;&gt;-->
+<!--            {%with messages = get_flashed_messages()%}-->
+<!--                {%if messages%}-->
+<!--                    {%for msg in messages%}-->
+<!--                        <div-->
+<!--                                class="alert alert-danger alert-dismissible fade show" role="alert">{{msg}}-->
+<!--                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>-->
+
+<!--                        </div>-->
+<!--                    {%endfor%}-->
+<!--                {%endif%}-->
+<!--            {%endwith%}-->
+<!--        </section>-->
+
+    {%block content%} {%endblock%}
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+<!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>
+
+
+<style>
+    nav {
+    position: relative;       /* important */
+    z-index: 1000;            /* higher than hero section */
+    position: fixed;
+}
+
+
+    /* Desktop links */
+.nav-line {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-line a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    position: relative;
+}
+
+/* Hover underline animation */
+.nav-line a::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #222;
+    transition: 0.25s ease;
+}
+
+.nav-line a:hover::after {
+    width: 100%;
+}
+
+.dropdown-item:hover{
+background:hsl(0, 0%, 90%);
+}
+</style>
+
