@@ -110,6 +110,8 @@ App-flask1/
 
 The application uses SQLite for local development. The database file is created automatically when the app is run for the first time.
 
+Delete the existing project db to start fresh.
+
 
 ◽Future Improvements
 
