@@ -1,116 +1,97 @@
-BunnyMe9 Quotes and Notes Web Application
-This project is a Flask-based web application that allows users to register, log in, and manage personal notes along with viewing random quotes. It demonstrates core web development concepts such as authentication, database integration, form handling, and clean UI design using Flask and related extensions.
-The project is intended for learning, practice, and portfolio demonstration.
+<h3>BunnyMe9 Quotes and Notes Web Application</h3>
+<p>This project is a Flask-based web application that allows users to register, log in, and manage personal notes along with viewing random quotes. It demonstrates core web development concepts such as authentication, database integration, form handling, and clean UI design using Flask and related extensions.
+The project is intended for learning, practice, and portfolio demonstration.</p>
 
-◽Project Overview
+<h2>Project Overview </h2>
+<h3>The application provides:</h3>
+<li>User authentication using Flask-Login</li>
+<li>Secure form handling using Flask-WTF</li> 
+<li>Database operations using SQLAlchemy</li>
+<li>CRUD functionality for notes</li>
+<li>Quote display on the homepage</li>
+<li>Flash messages for user feedback</li>
+<li>Session-based user experience</li>
+Each user can create, edit, delete, and search their own notes after logging in
 
-The application provides:
+<hr>
+<h2>Features</h2>
 
--User authentication using Flask-Login
+<h3>Authentication</h3>
+<ul>
+  <li>User registration with unique username validation</li>
+  <li>User login and logout</li>
+  <li>Session handling using Flask-Login</li>
+  <li>Account deletion support</li>
+</ul>
 
--Secure form handling using Flask-WTF
+<h3>Quotes Management</h3>
+<ul>
+  <li>Create new quotes</li>
+  <li>Edit existing quotes</li>
+  <li>Delete quotes</li>
+  <li>Notes are linked to individual users</li>
+</ul>
 
--Database operations using SQLAlchemy
+<h3>Quotes</h3>
+<ul>
+  <li>Random quote displayed on the homepage</li>
+  <li>Refresh quote without reloading the entire app</li>
+</ul>
 
--CRUD functionality for notes
+<h3>User Interface</h3>
+<ul>
+  <li>Bootstrap-based layout</li>
+  <li>Gradient header design</li>
+  <li>Responsive pages</li>
+  <li>Flash messages for errors and success notifications</li>
+</ul>
 
--Quote display on the homepage
+<hr>
 
--Flash messages for user feedback
+<h2>Technology Stack</h2>
+<ul>
+  <li>Python 3</li>
+  <li>Flask</li>
+  <li>Flask-Login</li>
+  <li>Flask-WTF</li>
+  <li>Flask-SQLAlchemy</li>
+  <li>WTForms</li>
+  <li>SQLite</li>
+  <li>HTML, CSS, Bootstrap</li>
+</ul>
 
--Session-based user experience
+<hr>
 
--Each user can create, edit, delete, and search their own notes after logging in
+<h2>📁 Project Structure</h2>
+<img src="project visuals/project-structure.png" width="500" alt="Project Structure">
 
+<hr>
 
-◽Features
+<h2> Database</h2>
+<p>
+The application uses <strong>SQLite</strong> for local development.  
+The database file is created automatically when the app is run for the first time.
+</p>
+<p>
+To start fresh, delete the existing project database file.
+</p>
 
-1)Authentication
+<hr>
 
-User registration with unique username validation
+<h2> Future Improvements</h2>
+<ul>
+  <li>Password reset functionality</li>
+  <li>User profile page</li>
+  <li>Tags and categories for notes</li>
+  <li>REST API support</li>
+  <li>Deployment to cloud platforms</li>
+  <li>Improved search and filtering</li>
+</ul>
 
-User login and logout
+<hr>
 
-Session handling using Flask-Login
-
-Account deletion support
-
-2)Quotes Management
-
-Create new quotes
-
-Edit existing quotes
-
-Delete quotes
-
-Notes are linked to individual users
-
-3)Quotes
-
-Random quote displayed on the homepage
-
-Refresh quote without reloading the entire app
-
-4)User Interface
-
-Bootstrap-based layout
-
-Gradient header design
-
-Responsive pages
-
-Flash messages for errors and success notifications
-
-
-◽Technology Stack
-
-Python 3
-
-Flask
-
-Flask-Login
-
-Flask-WTF
-
-Flask-SQLAlchemy
-
-WTForms
-
-SQLite
-
-HTML, CSS, Bootstrap
-
-
-◽Project Structure
-
-<img src="project visuals/project-structure.png" width="500">
-
-
-◽Database
-
-The application uses SQLite for local development. The database file is created automatically when the app is run for the first time.
-
-Delete the existing project db to start fresh.
-
-
-◽Future Improvements
-
-Password reset functionality
-
-User profile page
-
-Tags and categories for notes
-
-REST API support
-
-Deployment to cloud platforms
-
-Improved search and filtering
-
-
-◽Author
-
-Developed by Sanheeth Singh
-
+<h2>👨‍💻 Author</h2>
+<p>
+<strong>Developed by <a href="https://github.com/sanheeth-singh">Sanheeth Singh</a></strong><br>
 Flask-based learning and portfolio project
-
+</p>
